@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    image: mysql:5
+#    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+  wp:
+    build: .
+    image: wp-auth0
+    tty: true
+#    restart: always
+    depends_on:
+      - db
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html/wp-content/plugins/auth0
+      - ./auth0-wp-test:/var/www/html/wp-content/themes/auth0-wp-test
+    environment:
+      DB_HOST: db
+      DB_NAME: wordpress
+      DB_USER: wordpress
+      DB_PASS: wordpress
+      ADMIN_EMAIL: "josh.cunningham@auth0.com"
+      ADMIN_PASS: "josh.cunningham@auth0.com"
+    command: apache2-foreground
