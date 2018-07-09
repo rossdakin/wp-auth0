@@ -468,7 +468,7 @@ class WP_Auth0_LoginManager {
 			} catch ( WP_Auth0_RegistrationNotEnabledException $e ) {
 
 				$msg = __(
-					'Could not create user. The registration process is not available. Please contact your site’s administrator.',
+					'We do not have a record of you being a patroller. Please ask an administrator to create an account for you.',
 					'wp-auth0'
 				);
 				throw new WP_Auth0_LoginFlowValidationException( $msg );
