@@ -468,10 +468,10 @@ class WP_Auth0_LoginManager {
 			} catch ( WP_Auth0_RegistrationNotEnabledException $e ) {
 
 				$msg = __(
-					'We do not have a record of you being a patroller. Please ask an administrator to create an account for you.',
+					"We do not have a record of you being a patroller. Please ask an administrator to create an account matching your email address ({$userinfo->email}).",
 					'wp-auth0'
 				);
-				throw new WP_Auth0_LoginFlowValidationException( $msg );
+				throw new WP_Auth0_LoginFlowValidationException( $msg, 403 );
 			} catch ( WP_Auth0_EmailNotVerifiedException $e ) {
 
 				WP_Auth0_Email_Verification::render_die( $e->userinfo );
